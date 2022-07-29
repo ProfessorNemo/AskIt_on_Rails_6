@@ -1,12 +1,14 @@
-<% provide :page_title, 'Questions' %>
+<% provide :page_title, 'Questions'%>
 <% currently_at 'Questions' %>
 
 <h1 class="mb-4">Questions</h1>
 
-<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
-<% @questions.each do |question| %>
-  <article class="card mt-3">
-    <div class="card-body">
+<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg mb-3' %>
+  <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
+  <%# pagination @questions %>
+  <%= pagination @pagy %>
+  <% @questions.each do |question| %>
+    <article class="card mt-3"> <div class="card-body">
       <h4><%= question.title %></h2>
 
       <section class="card-text">
@@ -15,7 +17,7 @@
         </time>
 
         <p class="my-2">
-          <%= question.body %>
+          <%= truncate strip_tags(question.body), length: 150, omission: '...(continued)' %>
         </p>
       </section>
 
@@ -26,4 +28,6 @@
     </div>
   </article>
 <% end %>
-
+  <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
+  <%# pagination @questions %>
+  <%= pagination @pagy %>

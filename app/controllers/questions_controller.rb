@@ -5,12 +5,12 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.build
-    @answers = @question.answers.order created_at: :desc
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc)
     # Answer.where(question: @question).limit(2).order(created_at: :desc)
   end
 
   def index
-    @questions = Question.all
+    @pagy, @questions = pagy Question.order(created_at: :desc)
   end
 
   def new

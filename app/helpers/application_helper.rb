@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
+  # данная навигация показывается в том случае, если количество страниц больше 1
+  def pagination(obj)
+    # raw - для обработки разметки правильным образом
+    raw(pagy_bootstrap_nav(obj)) if obj.pages > 1
+  end
+
   def nav_tab(title, url, options = {})
     current_page = options.delete :current_page
 
