@@ -26,6 +26,7 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question)
     else
       @pagy, @answers = pagy @question.answers.order created_at: :desc
+      @answers = @answers.decorate
       render 'questions/show'
     end
   end
