@@ -6,7 +6,9 @@ module ApplicationHelper
   # данная навигация показывается в том случае, если количество страниц больше 1
   def pagination(obj)
     # raw - для обработки разметки правильным образом
+    # rubocop:disable Rails/OutputSafety
     raw(pagy_bootstrap_nav(obj)) if obj.pages > 1
+    # rubocop:enable Rails/OutputSafety
   end
 
   def nav_tab(title, url, options = {})

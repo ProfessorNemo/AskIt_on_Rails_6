@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # виртуальный аттрибут в БД попадать не будет, чтоб существовал
   # на объекте user метод old_password
-  attr_accessor :old_password
+  attr_accessor :old_password, :remember_token
 
   has_secure_password validations: false
 
@@ -16,7 +18,44 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
   validate :password_complexity
 
+  # rubocop:disable Rails/SkipsModelValidations
+  # сгенерировать token (абракадабра), на основе которого будем делать хэш
+  def remember_me
+    # self - чтобы пристыковать виртуальный аттрибут "remember_token" к текущему юзеру
+    self.remember_token = SecureRandom.urlsafe_base64
+    # поместить token в табличку c помощью update_column
+    update_column :remember_token_digest, digest(remember_token)
+  end
+
+  # Когда юзер выходит из системы, нам нужно всю информацию о нем очистить
+  def forget_me
+    update_column :remember_token_digest, nil
+
+    # не обязательно, в целях полноты
+    self.remember_token = nil
+  end
+  # rubocop:enable Rails/SkipsModelValidations
+
+  # Проверить, что тот token, который нам передается и тот, которы в БД - одно и то же
+  def remember_token_authenticated?(remember_token)
+    return false if remember_token_digest.blank?
+
+    # Хэш "remember_token_digest" такой же, который получается из строки "remember_token"
+    BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
+  end
+
   private
+
+  # сгенерировать хэш на основе строки
+  def digest(string)
+    cost = if ActiveModel::SecurePassword
+              .min_cost
+             BCrypt::Engine::MIN_COST
+           else
+             BCrypt::Engine.cost
+           end
+    BCrypt::Password.create(string, cost: cost)
+  end
 
   def correct_old_password
     # Если дайджесты совпали
@@ -30,8 +69,8 @@ class User < ApplicationRecord
     return if password.blank? || password =~ /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
 
     errors.add :password,
-               'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase,'\
-                '1 lowercase,1 digit and 1 special character'
+               'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase,' \
+               '1 lowercase,1 digit and 1 special character'
   end
 
   def password_presence

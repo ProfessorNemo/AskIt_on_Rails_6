@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   # пользователь в систему не вошел
   before_action :require_no_authentication, only: %i[new create]
