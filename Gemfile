@@ -26,9 +26,13 @@ gem 'bcrypt', '~> 3.1.13'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'activerecord-import', '~> 1.4'
+gem 'caxlsx', '~> 3.2'
+gem 'caxlsx_rails', '~> 0.6'
 gem 'draper', '~> 4.0'
 gem 'pagy', '~> 5.10'
+gem 'rubyXL', '~> 3.4'
+gem 'rubyzip', '~> 2.3'
 gem 'valid_email2', '~> 4.0'
 
 # Reduces boot times through caching; required in config/boot.rb
