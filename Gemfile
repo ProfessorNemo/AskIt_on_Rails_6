@@ -29,8 +29,10 @@ gem 'bcrypt', '~> 3.1.13'
 gem 'activerecord-import', '~> 1.4'
 gem 'caxlsx', '~> 3.2'
 gem 'caxlsx_rails', '~> 0.6'
+gem 'dotenv-rails', '~> 2.7'
 gem 'draper', '~> 4.0'
 gem 'pagy', '~> 5.10'
+gem 'rails-i18n', '~> 7.0.3'
 gem 'rubyXL', '~> 3.4'
 gem 'rubyzip', '~> 2.3'
 gem 'valid_email2', '~> 4.0'
@@ -51,7 +53,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 3.0'
   gem 'rubocop', '~> 1.30', require: false
   gem 'rubocop-performance', '~> 1.14', require: false
   gem 'rubocop-rails', '~> 2.14', require: false

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # https://github.com/caxlsx/caxlsx/tree/master/examples
 # https://www.sitepoint.com/accept-and-send-zip-archives-with-rails-and-rubyzip/
 # https://www.sitepoint.com/generate-excel-spreadsheets-rails-axlsx-gem/

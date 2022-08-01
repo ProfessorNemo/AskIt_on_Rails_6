@@ -37,4 +37,9 @@ module ApplicationHelper
       base_title
     end
   end
+
+  # для того, чтобыт при выборе локали не редиректило каждый раз на главную страницу
+  def params_plus(additional_params)
+    params.to_unsafe_h.merge(additional_params)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class UsersController < ApplicationController
     before_action :require_authentication
@@ -24,7 +26,7 @@ module Admin
     def create
       if params[:archive].present?
         UserBulkService.call params[:archive]
-        flash[:success] = 'Users imported!'
+        flash[:success] = t('.success')
       end
 
       redirect_to admin_users_path
