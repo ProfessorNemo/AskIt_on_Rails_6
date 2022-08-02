@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveDefaultUserIdFromQuestionsAnswers < ActiveRecord::Migration[6.1]
   # up и down - методы, которые вызываются при применении миграции и при откате
 
