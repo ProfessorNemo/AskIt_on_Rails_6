@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
   before_action :set_answer!, except: :create
 
   def update
-    if @answer.update answer_params
+    if @answer.update answer_update_params
       flash[:success] = t('.success')
       redirect_to question_path(@question, anchor: dom_id(@answer))
     else
@@ -19,7 +19,9 @@ class AnswersController < ApplicationController
   def edit; end
 
   def create
-    @answer = @question.answers.build answer_params
+    # Есть уже привязка к @question. Тогда привязка к @user см. в методе
+    # "answer_params" - .merge(user_id: current_user.id)
+    @answer = @question.answers.build answer_create_params
 
     if @answer.save
       flash[:success] = t('.success')
@@ -39,7 +41,13 @@ class AnswersController < ApplicationController
 
   private
 
-  def answer_params
+  # в параметры для создания ответа юзером добавлен параметр "user_id"
+  def answer_create_params
+    params.require(:answer).permit(:body).merge(user_id: current_user.id)
+  end
+
+  # при редактировании чужих ответов чтобы не было привязки к одному и тому же юзеру
+  def answer_update_params
     params.require(:answer).permit(:body)
   end
 

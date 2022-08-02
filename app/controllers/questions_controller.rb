@@ -40,7 +40,8 @@ class QuestionsController < ApplicationController
   def create
     # отрендерить обычный текст с параметрами запроса
     # render plain: params
-    @question = Question.new question_params
+    # для текущего юзера построить вопрос с таким-то параметрами
+    @question = current_user.questions.build question_params
     if @question.save
       flash[:success] = t('.success')
       redirect_to questions_path

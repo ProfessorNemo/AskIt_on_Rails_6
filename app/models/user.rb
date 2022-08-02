@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
+
   # виртуальный аттрибут в БД попадать не будет, чтоб существовал
   # на объекте user метод old_password
   attr_accessor :old_password, :remember_token
@@ -17,6 +20,10 @@ class User < ApplicationRecord
   # проверяем корректность вводимых емэйлов
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
   validate :password_complexity
+
+  # before_save - функция обратного вызова, которая выполняется каждый раз перед тем,
+  # как запись сохраняется в БД, когда email изменился с прошлого сохранения
+  before_save :set_gravatar_hash, if: :email_changed?
 
   # rubocop:disable Rails/SkipsModelValidations
   # сгенерировать token (абракадабра), на основе которого будем делать хэш
@@ -45,6 +52,20 @@ class User < ApplicationRecord
   end
 
   private
+
+  # функция обратного вызова
+  def set_gravatar_hash
+    return if email.blank?
+
+    # Генерируем хэш на основе email-юзера, удаляем пробелы сначала и конца и преобразуем
+    # его к нижнему регистру - это требования граватара. Потом на основе этого делаем хэш.
+    hash = Digest::MD5.hexdigest email.strip.downcase
+
+    # присвоить сохраняемой в данный момент записи (для которой выполнен callback) gravatar_hash
+    # и установить его в значение hash. Перед тем, как юзера сохранить (user.save), к нему
+    # пристыкуется еще значение "self.gravatar_hash = hash"
+    self.gravatar_hash = hash
+  end
 
   # сгенерировать хэш на основе строки
   def digest(string)

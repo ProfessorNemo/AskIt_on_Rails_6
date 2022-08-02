@@ -4,31 +4,12 @@
 <h1 class="mb-4"><%= t('.title') %></h1>
 
 <%= link_to t('.new'), new_question_path, class: 'btn btn-primary btn-lg mb-3' %>
-  <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
-  <%# pagination @questions %>
-  <%= pagination @pagy %>
-<% @questions.each do |question| %>
-  <article class="card my-3">
-    <div class="card-body">
-      <h4><%= question.title %></h2>
+<%# данная навигация показывается в том случае, если количество страниц больше 1 %>
+<%# pagination @questions %>
+<%= pagination @pagy %>
 
-      <section class="card-text">
-        <time datetime="<%= question.formatted_created_at %>">
-          <small><%= question.formatted_created_at %></small>
-        </time>
+<%= render @questions %>
 
-        <p class="my-2">
-          <%= truncate strip_tags(question.body), length: 150, omission: t('global.text.omission') %>
-        </p>
-      </section>
-
-      <%= link_to t('global.button.show'), question_path(question), class: 'btn btn-primary' %> 
-      <%= link_to t('global.button.edit'), edit_question_path(question), class: 'btn btn-secondary' %>
-      <%= link_to t('global.button.delete'), question_path(question), class: 'btn btn-danger',
-        data: {method: :delete, confirm: t('global.dialog.you_sure')} %>
-    </div>
-  </article>
-<% end %>
-  <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
-  <%# pagination @questions %>
-  <%= pagination @pagy %>
+<%# данная навигация показывается в том случае, если количество страниц больше 1 %>
+<%# pagination @questions %>
+<%= pagination @pagy %>

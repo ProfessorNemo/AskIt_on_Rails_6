@@ -2,6 +2,8 @@
 
 class QuestionDecorator < Draper::Decorator
   delegate_all
+  # Чтобы автоматически декорировать ту ассоциацию, которую мы вытаскиваем для вопроса
+  decorates_association :user
 
   # "self" перед created_at не говорим, потому что метод вызывается
   # относительно конкретного образца класса
