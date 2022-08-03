@@ -9,6 +9,8 @@ ru:
       question:
         body: Текст
         title: Заголовок
+        tags: Теги
+        tag_ids: Теги
       user:
         created_at: Создан
         email: Email
@@ -79,6 +81,7 @@ ru:
     index:
       new: Новый вопрос
       title: Вопросы
+      search_by_tags: Поиск по тегам
     new:
       title: Новый вопрос
     show:

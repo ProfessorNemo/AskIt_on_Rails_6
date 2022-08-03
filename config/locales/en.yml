@@ -9,6 +9,8 @@ en:
       question:
         body: Body
         title: Title
+        tags: Tags
+        tag_ids: Tags
       user:
         created_at: Created at
         email: Email
@@ -79,6 +81,7 @@ en:
     index:
       new: New question
       title: Questions
+      search_by_tags: Search by tags
     new:
       title: New question
     show:

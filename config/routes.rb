@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :api do
+    resources :tags, only: :index
+  end
+
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     resource :session, only: %i[new create destroy]
 

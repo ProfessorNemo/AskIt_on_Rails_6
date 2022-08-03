@@ -8,11 +8,14 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+
+
 // для правильной работы dropdawn подключение скриптов
 import '@popperjs/core'
 import 'bootstrap/js/dist/dropdown'
 // для отображения выпадающей формы
 import 'bootstrap/js/dist/collapse'
+import '../scripts/select2'
 
 Rails.start()
 Turbolinks.start()

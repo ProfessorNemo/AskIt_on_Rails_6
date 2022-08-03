@@ -3,13 +3,31 @@
 
 <h1 class="mb-4"><%= t('.title') %></h1>
 
+<section class="mb-5">
+  <h2><%= t '.search_by_tags' %></h2>
+
+  <%# отправляем форму на страницу "questions_path" - get-запрос%>
+  <%= form_with url: questions_path, method: :get do |f| %>
+    <div class="mb-3">
+      <%# {selected: params[:tag_ids]} - т.е. когда форма будет отправлена и страница перерисуется,
+            		в этой форме выбирутся все те теги, которые выбраны для построения этого поиска.
+            		required: true - чтоб эту форму нельзя было отправить пустой %>
+      <%# ajax — асинхронный запрос отправляться сюда "/api/tags" и чтобы отсюда вытаскивать только те теги,
+      					которые подходят под критерии пользователя, т.е. исходя из того, что юзер напечатает %>
+    <%= f.collection_select :tag_ids, (@tags || []), :id, :title, {selected: params[:tag_ids]},
+        multiple: true, required: true,
+        class: 'js-multiple-select js-ajax-select w-100', data: {'ajax-url': '/api/tags'} %>
+    </div>
+
+  <%= f.submit t('global.button.submit'), class: 'btn btn-primary' %>
+<% end %>
+</section>
+
 <%= link_to t('.new'), new_question_path, class: 'btn btn-primary btn-lg mb-3' %>
 <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
 <%# pagination @questions %>
 <%= pagination @pagy %>
-
 <%= render @questions %>
-
 <%# данная навигация показывается в том случае, если количество страниц больше 1 %>
 <%# pagination @questions %>
 <%= pagination @pagy %>
