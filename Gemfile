@@ -23,6 +23,7 @@ gem 'bcrypt', '~> 3.1.13'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'activerecord-import', '~> 1.4'
+gem 'blueprinter'
 gem 'caxlsx', '~> 3.2'
 gem 'caxlsx_rails', '~> 0.6'
 gem 'dotenv-rails', '~> 2.7'
