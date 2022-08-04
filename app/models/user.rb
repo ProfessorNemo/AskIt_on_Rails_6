@@ -1,18 +1,27 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # ролей может быть сколько угодно, наприер 3 - superadmin....
+  # Например: "u.admin_role?" - здесь role - suffix
+  enum role: { basic: 0, moderator: 1, admin: 2 }, _suffix: :role
+  # роль должна быть
+  validates :role, presence: true
+
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
 
   # виртуальный аттрибут в БД попадать не будет, чтоб существовал
   # на объекте user метод old_password
-  attr_accessor :old_password, :remember_token
+  attr_accessor :old_password, :remember_token, :admin_edit
 
   has_secure_password validations: false
 
   validate :password_presence
-  # Эту валидацию запускать только при обновлении записи и если указан новый пароль
-  validate :correct_old_password, on: :update, if: -> { password.present? }
+
+  # Эту валидацию нужно запускать только при обновлении записи и только  в том случае,
+  # если новый пароль был указан. Если нет - значит юзер пароль менять не хочет, - игнорируем.
+  # Если юзера меняет админ, тогда эту валидацию делать не нужно
+  validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
   validates :password, confirmation: true, allow_blank: true,
                        length: { minimum: 8, maximum: 70 }
 
@@ -20,6 +29,7 @@ class User < ApplicationRecord
   # проверяем корректность вводимых емэйлов
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
   validate :password_complexity
+  validate :role, presence: true
 
   # before_save - функция обратного вызова, которая выполняется каждый раз перед тем,
   # как запись сохраняется в БД, когда email изменился с прошлого сохранения

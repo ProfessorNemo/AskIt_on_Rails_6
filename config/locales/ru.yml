@@ -19,10 +19,18 @@ ru:
         password: Пароль
         password_confirmation: Подтверждение пароля
         updated_at: Обновлён
+        role: Роль
+        doing: Действие
     models:
       question: Вопрос
   admin:
     users:
+      edit:
+        title: Редактирование пользователя
+      destroy:
+        success: Пользователь удалён!
+      update:
+        success: Пользователь обновлён!
       create:
         success: Пользователи загружены!
       index:
@@ -48,6 +56,11 @@ ru:
       success: Ответ обновлён!
   en: Английский
   global:
+    user:
+      roles:
+        basic: Базовый
+        moderator: Модератор
+        admin: Админ
     button:
       delete: Удалить
       edit: Изменить

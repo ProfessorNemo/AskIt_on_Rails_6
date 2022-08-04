@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :users, only: %i[index create show destroy]
+      resources :users, except: %i[new]
     end
 
     root 'pages#index'

@@ -3,6 +3,7 @@
 module Admin
   class UsersController < ApplicationController
     before_action :require_authentication
+    before_action :set_user!, only: %i[edit update destroy]
 
     # вытащим всех юзеров и разобъем их по страницам
     def index
@@ -29,6 +30,24 @@ module Admin
         flash[:success] = t('.success')
       end
 
+      redirect_to admin_users_path
+    end
+
+    def edit; end
+
+    def update
+      # @user.admin_edit = true - только в админском контроллере
+      if @user.update user_params
+        flash[:success] = t '.success'
+        redirect_to admin_users_path
+      else
+        render :edit
+      end
+    end
+
+    def destroy
+      @user.destroy
+      flash[:success] = t '.success'
       redirect_to admin_users_path
     end
 
@@ -63,5 +82,22 @@ module Admin
       compressed_filestream.rewind
       send_data compressed_filestream.read, filename: 'users.zip'
     end
+
+    # найти юзера, которого есть желание отредактировать
+    def set_user!
+      @user = User.find params[:id]
+    end
+
+    # то, что мы хотим разрешить изменять в админке
+    def user_params
+      params.require(:user).permit(
+        :email, :name, :password, :password_confirmation, :role
+      ).merge(admin_edit: true)
+    end
   end
 end
+
+# Или в методе "update":
+# @user.admin_edit = true - (только в админском контроллере)
+# Или в методе "user_params":
+# ".merge(admin_edit: true)" - (только в админском контроллере)

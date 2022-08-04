@@ -1,5 +1,5 @@
-<%= render 'shared/errors', object: @user %>
-<%= form_with model: @user do |f| %>
+<%= render 'shared/errors', object: user %>
+<%= form_with model: user do |f| %>
   <div class="mb-3 row">
     <div class="col-sm-2 col-form-label">
       <%= f.label :email %>
@@ -17,6 +17,19 @@
 
     <div class="col-sm-10">
       <%= f.text_field :name, placeholder: 'Name', class: 'form-control form-control-lg' %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :role %>
+    </div>
+
+    <%# readonly: true  - в это поле ввести ничего нельзя, да и в НЕадминском контроллере
+    среди разрешенных параметров роли нет к тому же. Роль поменять не получится%>
+    <div class="col-sm-10">
+      <%= f.text_field :role, value: t(user.role, scope: 'global.user.roles'),
+        class: 'form-control-plaintext form-control-lg',readonly: true %>
     </div>
   </div>
 
@@ -57,5 +70,4 @@
 он в БД есть, то хочет себя обновить%>
 <%# <%= f.submit (@user.new_record? ? "Register!" : "Save"), class: 'btn btn-primary btn-lg' %>
 <% t_key = (@user.new_record? ? "register" : "save") %>
-  <%= f.submit t(t_key, scope: 'users.global.forms'), class: 'btn btn-primary btn-lg' %>
-<% end %>
+<%= f.submit t(t_key, scope: 'users.global.forms'), class: 'btn btn-primary btn-lg' %><% end %>
