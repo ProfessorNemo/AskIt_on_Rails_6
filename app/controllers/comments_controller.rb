@@ -4,10 +4,12 @@ class CommentsController < ApplicationController
   include QuestionsAnswers
   before_action :set_commentable!
   before_action :set_question
+  after_action :verify_authorized
 
   def create
     # создать новый комментарий для commentable
     @comment = @commentable.comments.build comment_params
+    authorize @comment
     # @comment.user = current_user
 
     if @comment.save
@@ -24,6 +26,7 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = @commentable.comments.find params[:id]
+    authorize comment
     comment.destroy
     flash[:success] = t '.success'
     redirect_to question_path(@question)

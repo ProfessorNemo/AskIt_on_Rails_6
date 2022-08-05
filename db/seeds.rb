@@ -18,7 +18,22 @@
 # end
 
 # создадим 30 тегов по случайным хипстерским словечкам
-30.times do
-  title = Faker::Hipster.word
-  Tag.create title: title
+# 30.times do
+#   title = Faker::Hipster.word
+#   Tag.create title: title
+# end
+
+p = 'Oceanborn20121703red!'
+
+user = User.create email: 'nemo@gmail.com',
+                   name: 'Nemo',
+                   password: p,
+                   password_confirmation: p
+
+# сгенерировать 5 вопросов вновь созданного пользователя "user"
+5.times do
+  title = Faker::Hipster.sentence(word_count: 3)
+  body = Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 4)
+  question = user.questions.build title: title, body: body
+  question.save
 end

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < BaseController
     before_action :require_authentication
     before_action :set_user!, only: %i[edit update destroy]
+    before_action :authorize_user!
+    after_action :verify_authorized
 
     # вытащим всех юзеров и разобъем их по страницам
     def index
@@ -93,6 +95,14 @@ module Admin
       params.require(:user).permit(
         :email, :name, :password, :password_confirmation, :role
       ).merge(admin_edit: true)
+    end
+
+    # м-д "authorize" возьмется из базового контроллера "BaseController"
+    def authorize_user!
+      # с наследованием
+      authorize(@user || User)
+      # без наследования
+      # authorize([:admin, (@user || User)])
     end
   end
 end

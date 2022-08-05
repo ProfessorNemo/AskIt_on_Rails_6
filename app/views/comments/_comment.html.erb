@@ -14,12 +14,14 @@
 
             <%# Удаление комментариев %>
             <%# polymorphic_path - хэлпер, умеющий строить путь на лету исходя из того, что передано
-                        на позиции "comment.commentable", тогда путь будет отстроен правильным образом. Т.е. либо
-                        путь будет такой "/questions/40/comments/12", либо такой "/answers/40/comments/12" %>
-            <%= link_to t('global.button.delete'),
+                                    на позиции "comment.commentable", тогда путь будет отстроен правильным образом. Т.е. либо
+                                    путь будет такой "/questions/40/comments/12", либо такой "/answers/40/comments/12" %>
+            <% if policy(comment).destroy? %>
+              <%= link_to t('global.button.delete'),
               polymorphic_path([comment.commentable, comment]),
               class: 'btn btn-danger btn-sm',
               data: {method: :delete, confirm: t('global.dialog.you_sure')} %>
+            <% end %>
           </div>
         </section>
       </div>

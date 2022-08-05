@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  include Authorship
   # данный комментарий принадлежит некой виртуальной модели, которую можно комментировать
   belongs_to :commentable, polymorphic: true
   belongs_to :user

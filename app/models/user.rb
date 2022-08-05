@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Blacklist
   # ролей может быть сколько угодно, наприер 3 - superadmin....
   # Например: "u.admin_role?" - здесь role - suffix
   enum role: { basic: 0, moderator: 1, admin: 2 }, _suffix: :role
@@ -28,12 +29,30 @@ class User < ApplicationRecord
   #  без обращения к DNS-почтовым серверам для проверки существования доменного
   # проверяем корректность вводимых емэйлов
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
+
   validate :password_complexity
-  validate :role, presence: true
+
+  validates :role, presence: true
+
+  validate :necessary_email
+
+  validate :necessary_name
 
   # before_save - функция обратного вызова, которая выполняется каждый раз перед тем,
   # как запись сохраняется в БД, когда email изменился с прошлого сохранения
   before_save :set_gravatar_hash, if: :email_changed?
+
+  # не гость
+  def guest?
+    false
+  end
+
+  # Юзер м.б. автором вопроса, ответа, комментария, поэтому "obj".
+  # И скажем obj.user == self (т.е.  obj.user - это сам юзер).
+  # У вопросов, ответов и комм-ев есть метод "user"
+  def author?(obj)
+    obj.user == self
+  end
 
   # rubocop:disable Rails/SkipsModelValidations
   # сгенерировать token (абракадабра), на основе которого будем делать хэш
@@ -88,24 +107,40 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  # "password_digest_was" - метод (создает RoR автоматически), который говорит, что нужно
+  # вытащить старый digest, который в БД, а не новый, который хранится в памяти. Сделаем digest
+  # на основе старого пароля (old_password) и сравним с тем, какой  в БД (password_digest_was).
+  # Если дайджесты совпали, значит старый пароль введен верно.
   def correct_old_password
-    # Если дайджесты совпали
     return if BCrypt::Password.new(password_digest_was).is_password?(old_password)
 
-    errors.add :old_password, 'is incorrect'
+    errors.add(:old_password, :correct_error)
   end
 
+  # проверка для сложности пароля
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
 
-    errors.add :password,
-               'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase,' \
-               '1 lowercase,1 digit and 1 special character'
+    errors.add(:password, :correct_error)
   end
 
+  # Нужно добавить для пароля сообщение, что он пустой, но не в том случае, если
+  # "password_digest" был уже указан. Если пароль был задал раньше, то в этом случае
+  # пароль можно указывать, а можно не указывать
   def password_presence
-    # Добавить для пароля сообщение, что от пустой
     errors.add(:password, :blank) if password_digest.blank?
+  end
+
+  # проверка подходящего email для регистрации
+  def necessary_email
+    blacklist
+    errors.add(:email, :registration_error) if blacklist.any?(email.split('@')[0])
+  end
+
+  # проверка подходящего имени для регистрации
+  def necessary_name
+    blacklist
+    errors.add(:name, :registration_error) if blacklist.any?(name.downcase)
   end
 end

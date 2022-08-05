@@ -1,5 +1,10 @@
 en:
   activerecord:
+    errors:
+      messages:
+        common_error: complexity requirement not met. Length should be 8-70 characters and include - 1 uppercase, 1 lowercase, 1 digit and 1 special character.
+        registration_error: not eligible for registration.
+        correct_error: is incorrect
     attributes:
       comment:
         body: Body
@@ -71,6 +76,7 @@ en:
     flash:
       already_signed_in: You are already signed in!
       not_signed_in: You are not signed in!
+      not_authorized: You are not authorized to perform this action!
     text:
       omission: "... (continued)"
   menu:
