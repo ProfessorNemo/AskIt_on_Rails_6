@@ -14,9 +14,16 @@ module Authorization
 
     # редирект либо туда, где был юзер до попытки выполнения действия. Если
     # "request.referer" нет, то на заглавную страницу
-    def user_not_authorized
-      flash[:danger] = t 'global.flash.not_authorized'
-      redirect_to(request.referer || root_path)
+    # def user_not_authorized
+    #   flash[:danger] = t 'global.flash.not_authorized'
+    #   redirect_to(request.referer || root_path)
+    # end
+
+    def user_not_authorized(exception)
+      policy_name = exception.policy.class.to_s.underscore
+
+      flash[:danger] = t "#{policy_name}.#{exception.query}", scope: 'pundit', default: :default
+      redirect_back(fallback_location: root_path)
     end
   end
 end

@@ -93,7 +93,7 @@ module Admin
     # то, что мы хотим разрешить изменять в админке
     def user_params
       params.require(:user).permit(
-        :email, :name, :password, :password_confirmation, :role
+        :email, :name, :password, :password_confirmation, :role, :status
       ).merge(admin_edit: true)
     end
 

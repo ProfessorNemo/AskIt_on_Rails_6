@@ -9,5 +9,13 @@ module Admin
         [t(role, scope: 'global.user.roles'), role]
       end
     end
+
+    def user_statuses
+      # возьмем ключи ролей { activated: 0, blocked: 1 }
+      User.statuses.keys.map do |status|
+        # текст статуса + id статуса
+        [t(status, scope: 'global.user.statuses'), status]
+      end
+    end
   end
 end

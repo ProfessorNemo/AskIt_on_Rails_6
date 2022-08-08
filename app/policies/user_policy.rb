@@ -3,7 +3,7 @@
 class UserPolicy < ApplicationPolicy
   # Кто может создать юзера или зарегистрироваться
   def create?
-    user.guest?
+    user.guest? && !user.blocked_status?
   end
 
   # Модифицировать свой профиль может только владелец профиля, т.е.

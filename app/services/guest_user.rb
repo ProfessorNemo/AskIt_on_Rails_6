@@ -14,7 +14,7 @@ class GuestUser
   def method_missing(name, *args, &block)
     # возвращает false, если название вызванного метода заканчивается на "role", т.е.
     # когда пытаемся считать роль, а у гостя нет никакой роли
-    return false if name.to_s.end_with?('_role?')
+    return false if name.to_s.end_with?('_role?', '_status?')
 
     # если м-д заканчивается на что-то другое и мы не знаем что это за м-д
     super(name, *args, &block)
@@ -23,7 +23,7 @@ class GuestUser
   def respond_to_missing?(name, include_private)
     # мы можем отвечать (образец класса отвечает) на м-д только если, если
     # название вызванного метода заканчивается на "role"
-    return true if name.to_s.end_with?('_role?')
+    return true if name.to_s.end_with?('_role?', '_status?')
 
     super(name, include_private)
   end

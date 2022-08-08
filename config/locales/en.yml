@@ -26,6 +26,7 @@ en:
         updated_at: Updated at
         role: Role
         doing: Action
+        status: Status
     models:
       question: Question
   admin:
@@ -66,6 +67,9 @@ en:
         basic: Basic
         moderator: Moderator
         admin: Admin
+      statuses:
+        activated: Activated
+        blocked: Blocked
     button:
       delete: Delete
       edit: Edit
@@ -136,3 +140,15 @@ en:
       title: Registration
     update:
       success: Your profile was successfully updated!
+  pundit:
+    default: 'You cannot perform this action.'
+    answer_policy:
+      update?: 'You cannot edit this answer!'
+      create?: 'You cannot create answers!'
+    comment_policy:
+      create?: 'You cannot create answers!'
+    question_policy:
+      update?: 'You cannot edit this answer!'
+      create?: 'You cannot create answers!'
+
+

@@ -5,8 +5,15 @@ class User < ApplicationRecord
   # ролей может быть сколько угодно, наприер 3 - superadmin....
   # Например: "u.admin_role?" - здесь role - suffix
   enum role: { basic: 0, moderator: 1, admin: 2 }, _suffix: :role
+
+  # Например: "u.activated_status?" - здесь role - suffix
+  enum status: { activated: 0, blocked: 1 }, _suffix: :status
+
   # роль должна быть
   validates :role, presence: true
+
+  # статус должен быть
+  validates :status, presence: true
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -31,8 +38,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
 
   validate :password_complexity
-
-  validates :role, presence: true
 
   validate :necessary_email
 

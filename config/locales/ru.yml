@@ -26,6 +26,7 @@ ru:
         updated_at: Обновлён
         role: Роль
         doing: Действие
+        status: Статус
     models:
       question: Вопрос
   admin:
@@ -66,6 +67,9 @@ ru:
         basic: Базовый
         moderator: Модератор
         admin: Админ
+      statuses:
+        activated: Активирован
+        blocked: Заблокирован
     button:
       delete: Удалить
       edit: Изменить
@@ -136,3 +140,13 @@ ru:
       title: Регистрация
     update:
       success: Ваш профиль был обновлён!
+  pundit:
+    default: Вы не можете выполнить это действие.
+    answer_policy:
+      update?: Вы не можете редактировать этот ответ!
+      create?: Вы не можете создавать ответы!
+    comment_policy:
+      create?: 'Вы не можете писать комментарии!'
+    question_policy:
+      update?: 'Вы не можете редактировать этот вопрос!'
+      create?: 'Вы не можете создавать вопросы!'
