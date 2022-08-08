@@ -49,6 +49,15 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Отправка будет происходить через letter_opener. В продакшене
+  # будет не "delivery_method"
+  config.action_mailer.delivery_method = :letter_opener
+  # true, потому что изначально в девелопменте письма не отправляются вовсе
+  config.action_mailer.perform_deliveries = true
+  # Где живет приложение (адрес хоста). Это нужно для того, чтоб
+  # правильным образом генерировать полные ссылки с именем домена
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

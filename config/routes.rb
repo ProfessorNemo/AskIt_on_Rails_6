@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     resource :session, only: %i[new create destroy]
 
+    # new create - запросить инструкции для сброса пароля, edit update - сбросить
+    resource :password_reset, only: %i[new create edit update]
+
     resources :users, only: %i[new create edit update]
 
     resources :questions do
