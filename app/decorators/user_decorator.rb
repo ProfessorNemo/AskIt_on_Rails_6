@@ -16,7 +16,7 @@ class UserDecorator < Draper::Decorator
     return name if name.present?
 
     # отображать первую часть email
-    email.split('@')[0]
+    email.split('@')[0].capitalize
   end
 
   def gravatar(size: 30, css_class: '')

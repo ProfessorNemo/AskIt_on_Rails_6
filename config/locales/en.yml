@@ -117,6 +117,8 @@ en:
   password_reset_mailer:
     reset_email:
       subject: 'Password reset | AskIt'
+  welcome_to_mailer:
+    subject: Welcome to our wonderful app!!!
   password_resets:
     fail: Could not reset your password...
     edit:

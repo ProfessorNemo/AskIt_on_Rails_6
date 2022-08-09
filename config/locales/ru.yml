@@ -133,6 +133,8 @@ ru:
   password_reset_mailer:
     reset_email:
       subject: 'Сброс пароля | AskIt'
+  welcome_to_mailer:
+    subject: Добро пожаловать в наше замечательное приложение!!!
   sessions:
     create:
       invalid_creds: Неверный email и/или пароль!

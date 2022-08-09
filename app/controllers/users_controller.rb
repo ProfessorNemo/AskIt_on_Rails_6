@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     if @user.save
       # признак для юзера, что он в систему вошел
       sign_in @user
+      WelcomeMailer.with(user: @user).welcome_email.deliver_later
       # flash[:success] = "Welcome to the app, #{current_user.name_or_email}!"
       flash[:success] = t('.success', name: current_user.name_or_email)
       redirect_to root_path
