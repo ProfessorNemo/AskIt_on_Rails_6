@@ -17,7 +17,13 @@ module Admin
           # render по умолчанию
         end
 
-        format.zip { respond_with_zipped_users }
+        format.zip do
+          UserBulkExportJob.perform_later current_user
+          # Задача поставлена в очередь на выполнение. Как только она завершится,
+          # вы получите уведомление на email
+          flash[:success] = t '.success'
+          redirect_to admin_users_path
+        end
       end
     end
 
@@ -28,7 +34,13 @@ module Admin
     # передаем ему архив "params[:archive]".
     def create
       if params[:archive].present?
-        UserBulkService.call params[:archive]
+        # UserBulkService.call params[:archive]
+        #
+        # Вместо вызова сервисного объекта с параметром "архив".
+        # perform_later - поставить задачу в очередь и сделать в фоне
+        # current_user - юзер, который инициировал задачу, и именно на его почту
+        # будет выслана инфа о выполнении задачи
+        UserBulkImportJob.perform_later create_blob, current_user
         flash[:success] = t('.success')
       end
 
@@ -55,34 +67,17 @@ module Admin
 
     private
 
-    def respond_with_zipped_users
-      # Сгенерировать zip-файл, в котором будут находиться файлы Excel
-      # OutputStream - архив, который мы будем пересылать юзеру в ответ на его запрос,
-      # при этотом этот архив на диске у нас храниться не будет (временный архив).
-      compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-        # Файлы будут создаваться для каждого юзера отдельно:
-        User.order(created_at: :desc).each do |user|
-          # Затем нам потребуется набрасывать в этот виртуальный архив какие-то файлы (записи).
-          # Указываем после "zos.put_next_entry" имя файла, который хотим поместить в архив:
-          zos.put_next_entry "user_#{user.id}.xlsx"
-          # Сгенерировать excel-файл с помощью метода "render_to_string". Т.е. будем делать строку,
-          # которую запишем с помощью "zos.print" в файл. Здесь:
-          # handlers - обработчик используемого шаблона, на основе которого формируется конечный файл.
-          # Обработчки наз. ":axlsx". template: 'admin/users/user' - представление, которое мы хотим
-          # отрендерить и на основе которого сделать строку (представление будет располагаться в 'admin/users/user').
-          # locals: { user: user } - локальная переменная, передаваемая представлению, которая будет
-          # называться "user", и браться переменная будет из текущего "user". На основе данной переменной
-          # сделаем файл Excel.
-          zos.print render_to_string(
-            layout: false, handlers: [:axlsx], formats: [:xlsx], template: 'admin/users/user', locals: { user: user }
-          )
-        end
-      end
-
-      # "Перемотать файл" - прочитать заново и отправить пользователю (rewind) архив "users.zip"
-      # "send_data" - метод RoR
-      compressed_filestream.rewind
-      send_data compressed_filestream.read, filename: 'users.zip'
+    # создать новый файл в ActiveStorage
+    def create_blob
+      # открыть присланный временный файл
+      file = File.open params[:archive]
+      # "io" - input/output - содержимое файла, а в качестве имени файла - оригинальное имя архива
+      result = ActiveStorage::Blob.create_and_upload! io: file,
+                                                      filename: params[:archive].original_filename
+      file.close
+      # Вернем "key" - уникальный идентификатор загруженного файла в ActiveStorage. Этот ключ
+      # будет храниться в одной из созданных таблиц
+      result.key
     end
 
     # найти юзера, которого есть желание отредактировать

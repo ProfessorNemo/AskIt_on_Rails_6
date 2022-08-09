@@ -30,6 +30,13 @@ ru:
     models:
       question: Вопрос
   admin:
+    user_mailer:
+      bulk_import_done:
+        subject: Импорт пользователей завершён | AskIt
+      bulk_import_fail:
+        subject: Импорт пользователей не удался | AskIt
+      bulk_export_done:
+        subject: Экспорт пользователей завершён | AskIt
     users:
       edit:
         title: Редактирование пользователя
@@ -38,8 +45,9 @@ ru:
       update:
         success: Пользователь обновлён!
       create:
-        success: Пользователи загружены!
+        success: Вы получите письмо, когда операция завершится
       index:
+        success: Вы получите письмо, когда операция завершится
         download_zipped: Загрузить архив с XLSX
         title: Управление пользователями
         upload_form:
@@ -132,7 +140,7 @@ ru:
   ru: Русский
   password_reset_mailer:
     reset_email:
-      subject: 'Сброс пароля | AskIt'
+      subject: "Сброс пароля | AskIt"
   welcome_to_mailer:
     subject: Добро пожаловать в наше замечательное приложение!!!
   sessions:
@@ -168,7 +176,7 @@ ru:
       update?: Вы не можете редактировать этот ответ!
       create?: Вы не можете создавать ответы!
     comment_policy:
-      create?: 'Вы не можете писать комментарии!'
+      create?: "Вы не можете писать комментарии!"
     question_policy:
-      update?: 'Вы не можете редактировать этот вопрос!'
-      create?: 'Вы не можете создавать вопросы!'
+      update?: "Вы не можете редактировать этот вопрос!"
+      create?: "Вы не можете создавать вопросы!"

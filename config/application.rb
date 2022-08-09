@@ -30,7 +30,7 @@ module DubAskIt
     # Языки, которые буду поддерживаться
     config.i18n.available_locales = %i[en ru]
     # локаль по умолчанию
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -38,9 +38,12 @@ module DubAskIt
     #
     # Временная зона приложения
     # config.time_zone = "Central Time (US & Canada)"
-    # config.time_zone = 'Moscow'
-    # config.active_record.default_timezone = 'Moscow'
+    config.time_zone = 'Moscow'
+    config.active_record.default_timezone = 'Moscow'
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # ActiveJob должен использовать адаптер Sidekiq
+    config.active_job.queue_adapter = :sidekiq
 
     # Don't generate system test files.
     config.generators.system_tests = nil

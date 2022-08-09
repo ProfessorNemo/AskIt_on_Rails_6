@@ -30,6 +30,13 @@ en:
     models:
       question: Question
   admin:
+    user_mailer:
+      bulk_import_done:
+        subject: User import done | AskIt
+      bulk_import_fail:
+        subject: User import failed | AskIt
+      bulk_export_done:
+        subject: User export done | AskIt
     users:
       edit:
         title: Edit user
@@ -38,8 +45,9 @@ en:
       update:
         success: User updated!
       create:
-        success: Users imported!
+        success: You'll get an email once this operation is done
       index:
+        success: You'll get an email once this operation is done
         download_zipped: Download zipped XLSX
         title: Admin Users
         upload_form:
@@ -116,7 +124,7 @@ en:
   ru: Russian
   password_reset_mailer:
     reset_email:
-      subject: 'Password reset | AskIt'
+      subject: "Password reset | AskIt"
   welcome_to_mailer:
     subject: Welcome to our wonderful app!!!
   password_resets:
@@ -163,12 +171,12 @@ en:
     update:
       success: Your profile was successfully updated!
   pundit:
-    default: 'You cannot perform this action.'
+    default: "You cannot perform this action."
     answer_policy:
-      update?: 'You cannot edit this answer!'
-      create?: 'You cannot create answers!'
+      update?: "You cannot edit this answer!"
+      create?: "You cannot create answers!"
     comment_policy:
-      create?: 'You cannot create answers!'
+      create?: "You cannot create answers!"
     question_policy:
-      update?: 'You cannot edit this answer!'
-      create?: 'You cannot create answers!'
+      update?: "You cannot edit this answer!"
+      create?: "You cannot create answers!"

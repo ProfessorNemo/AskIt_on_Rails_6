@@ -22,19 +22,36 @@ gem 'bcrypt', '~> 3.1.13'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'activerecord-import', '~> 1.4'
-gem 'blueprinter'
-gem 'caxlsx', '~> 3.2'
-gem 'caxlsx_rails', '~> 0.6'
-gem 'dotenv-rails', '~> 2.7'
-gem 'draper', '~> 4.0'
-gem 'pagy', '~> 5.10'
-gem 'pundit', '~> 2.2'
-gem 'rails-i18n', '~> 7.0.3'
-gem 'rubyXL', '~> 3.4'
-gem 'rubyzip', '~> 2.3'
-gem 'valid_email2', '~> 4.0'
 
+# Позволяет импортировать множество записей за один запрос
+# https://github.com/zdennis/activerecord-import
+gem 'activerecord-import', '~> 1.4'
+# Сериализатор - это программный код, с помощью которого объекты ruby превращаются
+# в json. Сериализатор работает быстрее, чем 'jbuilder', '~> 2.11'
+gem 'blueprinter'
+# решение, помогающие создавать файлы xlxs, но не умеет считывать
+gem 'caxlsx', '~> 3.2'
+# решение, помогающие правильным образом работать с представлениями
+gem 'caxlsx_rails', '~> 0.6'
+# решение, которое позволяет загружать дополнительную конфигурацию из файлов .env
+gem 'dotenv-rails', '~> 2.7'
+# декораторы
+gem 'draper', '~> 4.0'
+# гемы для разбиения по страничкам
+gem 'pagy', '~> 5.10'
+# описывает то ,что могут делать юзеры в зависимости от их роли
+# https://github.com/varvet/pundit
+gem 'pundit', '~> 2.2'
+# для подгрузки в приложение типичных переводов (месяцы, дни недели, валюты и т.д.)
+gem 'rails-i18n', '~> 7.0.3'
+# позволяет работать с XLSX, считывать и модифицировать
+gem 'rubyXL', '~> 3.4'
+# решение, которое позволяет работать с архивами .zip
+gem 'rubyzip', '~> 2.3'
+# адаптер для выполнения задач в фоновом режиме
+gem 'sidekiq', '~> 6.5'
+# для проверки корректности введенного email
+gem 'valid_email2', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -48,8 +65,9 @@ end
 group :development do
   # Чтобы искать неоптимальные запросы и их устранять используется решение «bullet»
   gem 'bullet', '~> 7'
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  # Решение, которое позволит тестировать отправку писем в локальной среде без почтового сервера
   gem 'letter_opener'
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
@@ -60,14 +78,6 @@ group :development do
   gem 'rubocop-rails', '~> 2.14', require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
-
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
