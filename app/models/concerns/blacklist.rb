@@ -5,7 +5,7 @@ module Blacklist
 
   included do
     def blacklist
-      @blacklist ||= File.readlines(Rails.root.join('lib', 'blacklist.txt'))
+      @blacklist ||= File.readlines(Rails.root.join('.lib/blacklist.txt'))
       @blacklist.map(&:strip)
     end
   end

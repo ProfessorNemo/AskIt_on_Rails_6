@@ -1,6 +1,7 @@
 require:
   - rubocop-performance
   - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
@@ -18,10 +19,26 @@ Metrics/AbcSize:
 Rails/I18nLocaleTexts:
   Enabled: false
 
-Rails/FilePath:
-  EnforcedStyle: arguments
+# Rails/FilePath:
+#   EnforcedStyle: arguments
 
+convention:Metrics/BlockLength:
+  Max: 70
 
+RSpec/MultipleExpectations:
+  Max: 100
+
+RSpec/ExampleLength:
+  Max: 100
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/ExpectActual:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
 
 
 

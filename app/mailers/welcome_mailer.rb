@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WelcomeMailer < ApplicationMailer
   # Приветственное сообщение
   def welcome_email
