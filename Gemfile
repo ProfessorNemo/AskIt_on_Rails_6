@@ -61,6 +61,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 2'
   gem 'pry-rails'
+  gem 'pundit-matchers', '~> 1.7.0'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 5.1.2'
 end
 

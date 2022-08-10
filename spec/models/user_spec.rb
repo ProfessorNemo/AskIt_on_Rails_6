@@ -23,14 +23,15 @@ RSpec.describe User, type: :model do
       expect { user.save }.not_to raise_error
     end
 
-    it 'name is required' do
-      user = build(:user, name: nil)
-      expect(user).to be_valid
+    it 'email is required' do
+      user = build(:user, email: 'job@gmail.com')
+      expect(user).not_to be_valid
     end
 
-    it 'email is required' do
-      user = build(:user, email: nil)
-      expect(user).not_to be_valid
+    it 'name is required' do
+      user = build(:user, name: nil)
+      puts user.inspect
+      expect(user).to be_valid
     end
 
     it 'password_digest is required' do
@@ -45,7 +46,7 @@ RSpec.describe User, type: :model do
 
     it 'User name is John and basic' do
       user = build(:user)
-      expect(user.name).to eq('John')
+      expect(user.name).to eq('Alex')
       expect(user.role).to eq('basic')
     end
 
@@ -57,7 +58,6 @@ RSpec.describe User, type: :model do
     it 'user is empty' do
       user = attributes_for(:user)
       expect(user).not_to be_empty
-      puts user.inspect
     end
   end
 
@@ -66,7 +66,6 @@ RSpec.describe User, type: :model do
       user = build_stubbed(:admin)
       expect(user.role).to eq('admin')
       expect(user.id).to be_truthy
-      puts user.inspect
     end
   end
 end

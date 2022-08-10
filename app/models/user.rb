@@ -123,6 +123,6 @@ class User < ApplicationRecord
   # проверка подходящего имени для регистрации
   def necessary_name
     blacklist
-    errors.add(:name, :registration_error) if blacklist.any?(name.downcase)
+    errors.add(:name, :registration_error) if blacklist.any?(name&.downcase)
   end
 end

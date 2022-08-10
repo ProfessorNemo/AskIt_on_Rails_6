@@ -2,12 +2,13 @@
 
 FactoryBot.define do
   factory :user do
-    name { 'John' }
+    name { 'Alex' }
     sequence :email do |n|
-      "fuckingJohn#{n}@example.com"
+      "alex-fucking#{n}@gmail.com"
     end
-    password_digest { '123' }
+    password_digest { 'Omega123456!' }
     role { 'basic' }
+    status { 'activated' }
 
     factory :user_with_incorrect_email do
       email { 'test' }
@@ -17,6 +18,11 @@ FactoryBot.define do
       role { 'admin' }
     end
 
+    trait :blocked do
+      status { 'blocked' }
+    end
+
     factory :admin, traits: [:admin]
+    factory :blocked, traits: [:blocked]
   end
 end
