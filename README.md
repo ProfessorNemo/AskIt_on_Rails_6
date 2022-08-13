@@ -14,3 +14,4 @@ The launch of the application in the master branch is carried out by the command
 * bin/rails s
 After that, you should be able to access the local host server:
 It usually looks something like this in the URL: http://127.0.0.1:3000.
+
