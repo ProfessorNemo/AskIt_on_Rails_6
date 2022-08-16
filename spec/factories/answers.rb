@@ -12,3 +12,8 @@ FactoryBot.define do
     association :user, factory: :user
   end
 end
+
+# Ответы принадлежат вопросам
+# association :question, factory: :question
+# Ассоциациация - question. И для построения этой ассоциации нужно
+# использовать factory: :question

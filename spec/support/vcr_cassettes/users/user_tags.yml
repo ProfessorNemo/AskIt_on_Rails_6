@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:3000/api/tags
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.5.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Language:
+      - en
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Cache-Control:
+      - no-store, must-revalidate, private, max-age=0
+      X-Request-Id:
+      - d4b7337b-8e20-4dd8-81b2-2d501752b120
+      X-Runtime:
+      - '0.007791'
+      X-Miniprofiler-Original-Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Miniprofiler-Ids:
+      - h070gl79oi595nqdr8l7,uk0sfkvbe0kbp0tbf1bu,hea5ichy0aj9kry1yip7,w3mujs2kg4t79gtq2hz3,v9pcoiqnmmwt1xwzwv8e,nv1ufldpo3rn0fw75x6f,vw8sfkfptiuqxw3sbqz,t8klh45c314shga02783,jtl41hqroqqtqnud2j16,dg1eisr4jlk7rzd7iiee
+      Set-Cookie:
+      - __profilin=p%3Dt; path=/; HttpOnly; SameSite=Lax
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"id":1,"title":"90''s"},{"id":2,"title":"Yuccie"},{"id":3,"title":"leggings"},{"id":4,"title":"flexitarian"},{"id":5,"title":"humblebrag"},{"id":6,"title":"tacos"},{"id":7,"title":"migas"},{"id":8,"title":"scenester"},{"id":9,"title":"YOLO"},{"id":10,"title":"retro"},{"id":11,"title":"chartreuse"},{"id":12,"title":"tofu"},{"id":13,"title":"lumbersexual"},{"id":14,"title":"truffaut"},{"id":15,"title":"artisan"},{"id":16,"title":"sustainable"},{"id":17,"title":"disrupt"},{"id":18,"title":"kickstarter"},{"id":19,"title":"aesthetic"},{"id":20,"title":"waistcoat"},{"id":21,"title":"etsy"},{"id":22,"title":"brunch"},{"id":23,"title":"poutine"},{"id":24,"title":"drinking"},{"id":25,"title":"gluten-free"},{"id":26,"title":"ennui"},{"id":27,"title":"vegan"},{"id":28,"title":"brooklyn"},{"id":29,"title":"phlogiston"},{"id":30,"title":"austin"}]'
+  recorded_at: Tue, 16 Aug 2022 23:31:59 GMT
+recorded_with: VCR 6.1.0

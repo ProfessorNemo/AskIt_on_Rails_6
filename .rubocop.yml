@@ -40,5 +40,8 @@ RSpec/ExpectActual:
 RSpec/ContextWording:
   Enabled: false
 
+Rails/HttpPositionalArguments:
+  Enabled: false
+
 
 

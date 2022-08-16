@@ -62,6 +62,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'validates_2' do
+    it_behaves_like 'a user'
+
     it 'validates_user_admin' do
       user = build_stubbed(:admin)
       expect(user.role).to eq('admin')
