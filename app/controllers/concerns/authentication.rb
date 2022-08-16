@@ -68,8 +68,8 @@ module Authentication
     def remember(user)
       user.remember_me
       # Кого мы запомнили и с помощью какого токена
-      cookies.encrypted.permanent[:remember_token] = user.remember_token
-      # cookies.encrypted[:remember_token] = { value: user.remember_token, expires: 12.hours.from_now }
+      # cookies.encrypted.permanent[:remember_token] = user.remember_token
+      cookies.encrypted[:remember_token] = { value: user.remember_token, expires: 5.hours.from_now }
       cookies.encrypted.permanent[:user_id] = user.id
     end
 

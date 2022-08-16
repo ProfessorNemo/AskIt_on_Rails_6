@@ -34,6 +34,7 @@ gem 'caxlsx', '~> 3.2'
 # решение, помогающие правильным образом работать с представлениями
 gem 'caxlsx_rails', '~> 0.6'
 # решение, которое позволяет загружать дополнительную конфигурацию из файлов .env
+gem 'dotenv', '~> 2.7'
 gem 'dotenv-rails', '~> 2.7'
 # декораторы
 gem 'draper', '~> 4.0'
@@ -64,6 +65,15 @@ group :development, :test do
   gem 'pundit-matchers', '~> 1.7.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 5.1.2'
+end
+
+gem 'faraday', '~> 2.5'
+gem 'json', '~> 2.6', '>= 2.6.2'
+
+group :test do
+  gem 'rspec', '~> 3.11'
+  gem 'vcr', '~> 6.1'
+  gem 'webmock', '~> 3.14'
 end
 
 group :development do
