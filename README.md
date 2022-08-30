@@ -11,6 +11,7 @@ You can write questions and comments, edit, delete. Also create, delete, block, 
 The launch of the application in the master branch is carried out by the commands
 * rails db:create RAILS_ENV=development - generate a database
 * rails db:migrate - apply all migrations
-* bin/rails s
+* bin/dev
 After that, you should be able to access the local host server:
 It usually looks something like this in the URL: http://127.0.0.1:3000.
+Application screenshots are located in the "application screenshots" directory
