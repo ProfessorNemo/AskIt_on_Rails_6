@@ -67,6 +67,7 @@ group :development, :test do
   gem 'rspec-rails', '>= 5.1.2'
 end
 
+gem 'foreman', '~> 0.87.2'
 gem 'faraday', '~> 2.5'
 gem 'json', '~> 2.6', '>= 2.6.2'
 
