@@ -12,6 +12,7 @@ The launch of the application in the master branch is carried out by the command
 * rails db:create RAILS_ENV=development - generate a database
 * rails db:migrate - apply all migrations
 * bin/dev
+
 After that, you should be able to access the local host server:
 It usually looks something like this in the URL: http://127.0.0.1:3000.
 Application screenshots are located in the "application screenshots" directory
