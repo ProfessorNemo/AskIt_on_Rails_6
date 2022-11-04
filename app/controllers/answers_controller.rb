@@ -11,15 +11,6 @@ class AnswersController < ApplicationController
   before_action :authorize_answer!
   after_action :verify_authorized
 
-  def update
-    if @answer.update answer_update_params
-      flash[:success] = t('.success')
-      redirect_to question_path(@question, anchor: dom_id(@answer))
-    else
-      render :edit
-    end
-  end
-
   def edit; end
 
   def create
@@ -32,6 +23,15 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question)
     else
       load_question_answers(do_render: true)
+    end
+  end
+
+  def update
+    if @answer.update answer_update_params
+      flash[:success] = t('.success')
+      redirect_to question_path(@question, anchor: dom_id(@answer))
+    else
+      render :edit
     end
   end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Answer, type: :model do
+RSpec.describe Answer do
   let(:user) { create(:admin) }
   let(:question) { create(:id) }
   let(:answer) { create(:answer, question_id: 1, user_id: 1) }

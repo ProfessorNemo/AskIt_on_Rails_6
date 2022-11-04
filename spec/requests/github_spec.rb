@@ -8,7 +8,7 @@ RSpec.describe Box::Github do
   end
 
   it 'can fetch & parse user data' do
-    expect(user_response).to be_kind_of(Hash)
+    expect(user_response).to be_a(Hash)
 
     expect(user_response).to have_key(:id)
     expect(user_response).to have_key(:type)

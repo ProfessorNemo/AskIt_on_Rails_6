@@ -32,6 +32,8 @@ module Admin
 
     # Проверить, был ли передан архив. Если да, вызываем сервисный класс "UserBulkService",
     # передаем ему архив "params[:archive]".
+    def edit; end
+
     def create
       if params[:archive].present?
         # UserBulkService.call params[:archive]
@@ -46,8 +48,6 @@ module Admin
 
       redirect_to admin_users_path
     end
-
-    def edit; end
 
     def update
       # @user.admin_edit = true - только в админском контроллере

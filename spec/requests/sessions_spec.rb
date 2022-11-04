@@ -31,7 +31,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe '#new' do
     it 'render :new' do
-      new_user = build :user
+      new_user = build(:user)
       get :new, params: {
         user: {
           id: new_user.id,

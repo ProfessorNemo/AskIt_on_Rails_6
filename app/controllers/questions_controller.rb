@@ -15,14 +15,14 @@ class QuestionsController < ApplicationController
   # действиях контроллера
   after_action :verify_authorized
 
-  def show
-    load_question_answers
-  end
-
   def index
     @tags = Tag.where(id: params[:tag_ids]) if params[:tag_ids]
     @pagy, @questions = pagy Question.all_by_tags(@tags)
     @questions = @questions.decorate
+  end
+
+  def show
+    load_question_answers
   end
 
   def new
@@ -30,6 +30,19 @@ class QuestionsController < ApplicationController
   end
 
   def edit; end
+
+  def create
+    # отрендерить обычный текст с параметрами запроса
+    # render plain: params
+    # для текущего юзера построить вопрос с таким-то параметрами
+    @question = current_user.questions.build question_params
+    if @question.save
+      flash[:success] = t('.success')
+      redirect_to questions_path
+    else
+      render :new
+    end
+  end
 
   def update
     if @question.update question_params
@@ -44,19 +57,6 @@ class QuestionsController < ApplicationController
     @question.destroy
     flash[:success] = t('.success')
     redirect_to questions_path
-  end
-
-  def create
-    # отрендерить обычный текст с параметрами запроса
-    # render plain: params
-    # для текущего юзера построить вопрос с таким-то параметрами
-    @question = current_user.questions.build question_params
-    if @question.save
-      flash[:success] = t('.success')
-      redirect_to questions_path
-    else
-      render :new
-    end
   end
 
   private

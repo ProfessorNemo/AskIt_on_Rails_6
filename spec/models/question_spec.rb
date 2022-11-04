@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Question, type: :model do
+RSpec.describe Question do
   describe 'slugs' do
     it 'creates a proper slug for Russian' do
       question = create(:id)

@@ -8,7 +8,7 @@ RSpec.shared_examples_for 'a user' do
   it { is_expected.to respond_to(:email) }
 end
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   it_behaves_like 'a user'
   context 'validates' do
     it 'is valid' do

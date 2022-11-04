@@ -8,9 +8,9 @@ RSpec.describe Box::TagsJson do
   end
 
   it 'can fetch & parse user data' do
-    expect(user_tags.first).to be_kind_of(Hash)
+    expect(user_tags.first).to be_a(Hash)
 
-    expect(user_tags).to be_kind_of(Array)
+    expect(user_tags).to be_a(Array)
 
     expect(user_tags.first).to respond_to(:keys)
 
