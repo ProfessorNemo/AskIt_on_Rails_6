@@ -40,6 +40,7 @@ yarn-debug.log*
 .yarn-integrity
 .byebug_history
 .yarn
+.vscode/*
 
 .env
 /app/assets/builds/*

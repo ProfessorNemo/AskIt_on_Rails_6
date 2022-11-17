@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.shared_examples_for 'a user' do
   it { is_expected.to respond_to(:name) }
   it { is_expected.to respond_to(:role) }

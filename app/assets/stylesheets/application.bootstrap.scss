@@ -1,5 +1,4 @@
 @import 'custom';
-@import 'bootstrap-icons/font/bootstrap-icons';
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
@@ -14,5 +13,3 @@
 @import "bootstrap/scss/pagination";
 @import "bootstrap/scss/alert";
 @import 'tom-select/dist/scss/tom-select.bootstrap5';
-// Для подключения абсолютно всех стилей
-@import "bootstrap/scss/bootstrap";

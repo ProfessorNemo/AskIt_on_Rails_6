@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.configure { |c| c.before { expect(controller).not_to be_nil } }
 
 RSpec.describe QuestionsController, type: :controller do

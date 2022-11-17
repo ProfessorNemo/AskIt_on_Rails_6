@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Box::Github do
   let(:user_response) do
     VCR.use_cassette('users/user') { described_class.user('ruby') }

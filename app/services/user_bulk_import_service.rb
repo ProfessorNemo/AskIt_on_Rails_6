@@ -22,8 +22,8 @@ class UserBulkImportService < ApplicationService
         # Нужно создать массив пользователей на основе файла, затем импортировать
         # сразу все и игнорировать дублирующиеся с уже сделанными валидациями
         # https://github.com/zdennis/activerecord-import
-        User.import users_from(f.read), validate: true, ignore: true,
-                                        validate_with_context: Symbol, all_or_none: true
+        User.import users_from(f.read), ignore: true
+        
         f.close
       end
     end

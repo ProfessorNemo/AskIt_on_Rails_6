@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Question do
   describe 'slugs' do
     it 'creates a proper slug for Russian' do

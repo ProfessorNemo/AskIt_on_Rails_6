@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Box::TagsJson do
   let(:user_tags) do
     VCR.use_cassette('users/user_tags') { described_class.tags }

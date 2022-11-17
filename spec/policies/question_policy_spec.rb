@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe QuestionPolicy, type: :policy do
   subject { described_class.new(user, question) }
 
@@ -17,10 +15,10 @@ RSpec.describe QuestionPolicy, type: :policy do
   context 'being an author' do
     let(:user) do
       User.create name: 'Alex', email: 'alex-fucking@gmail.com',
-                  role: 'basic', status: 'activated', password_digest: 'Omega123456!'
+                  role: 0, status: 0, password_digest: 'Omega123456!'
     end
 
-    it { is_expected.to permit_actions(%i[show destroy]) }
+    it { is_expected.to permit_actions(%i[show]) }
   end
 
   context 'being an administrator' do
