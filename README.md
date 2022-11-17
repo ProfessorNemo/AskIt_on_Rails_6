@@ -47,7 +47,7 @@ Find user `id` by `name`
 ```
 
 ```ruby
-> User.find(1).update(role: 2)
+> User.find(1).update(role: 'admin')
 ```
 Now you will have administrator rights to download, upload, delete, edit
 and blocking users, as well as `http://127.0.0.1:3000/sidekiq`.
@@ -115,7 +115,8 @@ after
 $ make rspec
 ```
 
-For API testing, you can also use a solution such as [`Postman`](https://www.postman.com/)
+For API testing, you can also use a solution such as [`Postman`](https://www.postman.com/).
+
 
 
 Open `localhost:3000` in browser.
