@@ -8,19 +8,23 @@ require 'sidekiq/web'
 # "user_id" - помещен либо в сессию, либо в зашифрованные куки если юзер поставил галочку
 # "запомнить меня" (см. authentication.rb)
 # request.cookie_jar.encrypted[:user_id] - дешифровка куки
-class AdminConstraint
-  def matches?(request)
-    user_id = request.session[:user_id] || request.cookie_jar.encrypted[:user_id]
+module RouteConstraint
+  class Admin
+    def self.matches?(request)
+      user_id = request.session[:user_id] || request.cookie_jar.encrypted[:user_id]
 
-    # является ли найденный юзер админом (если юзер найден)
-    User.find_by(id: user_id)&.admin_role?
+      # является ли найденный юзер админом (если юзер найден)
+      User.find_by(id: user_id)&.admin_role?
+    end
   end
 end
 
 Rails.application.routes.draw do
   # Смонтировать маршрут Sidekiq::Web , по какому адресу он будет доступен ('/sidekiq'),
   # т.е. подрубаем интерфейс sidekiq по адресу '/sidekiq' (http://127.0.0.1:3000/sidekiq)
-  mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
+
+  # mount Sidekiq::Web => '/sidekiq', constraints: RouteConstraint::Admin
+  mount Sidekiq::Web => '/sidekiq'
 
   namespace :api do
     resources :tags, only: :index

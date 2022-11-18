@@ -50,7 +50,7 @@ Find user `id` by `name`
 > User.find(1).update(role: 'admin')
 ```
 Now you will have administrator rights to download, upload, delete, edit
-and blocking users, as well as `http://127.0.0.1:3000/sidekiq`.
+and blocking users.
 
 ### API:
 
@@ -68,7 +68,7 @@ A test archive with users for loading into the application is located in the dir
 The process of sending emails (in our case to the administrator), as well as importing and exporting users, runs in the background. The archive is saved using ActiveStorage (see config/storage.yml) to itself locally in the “storage” directory and then work is performed with this archive in ActiveJob.
 
 Sidekiq has an interface that allows you to see what broke, how many tasks were completed, when it happened, how many connections, what version of Redis has, how much memory Redis is using, etc. To connect this interface in the address bar, write:
-http://127.0.0.1:3000/sidekiq. Only the administrator has access to it.
+http://127.0.0.1:3000/sidekiq.
 
 The application is covered with tests...
 
@@ -116,7 +116,6 @@ $ make rspec
 ```
 
 For API testing, you can also use a solution such as [`Postman`](https://www.postman.com/).
-
 
 
 Open `localhost:3000` in browser.

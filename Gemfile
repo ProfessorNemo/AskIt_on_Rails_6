@@ -37,7 +37,7 @@ gem 'rubyXL', '~> 3.4'
 # решение, которое позволяет работать с архивами .zip
 gem 'rubyzip', '~> 2.3'
 # адаптер для выполнения задач в фоновом режиме
-gem 'sidekiq', '~> 7'
+gem "sidekiq", github: "mperham/sidekiq"
 # для проверки корректности введенного email
 gem 'valid_email2', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
